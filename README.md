@@ -21,7 +21,8 @@ An interactive, 40-page storytelling presentation of the Dar Albahja logo and br
 - Copy-to-clipboard palette, hotspot emblem anatomy, live type specimen
 - Friendly WebAudio sound effects (toggle with the 🔊 button)
 - Numbered puzzle tiles and cells for easy assembly
-- Downloadable full-presentation PDF on the last page — encrypted, opens with the same key `dena`
+- Click any image for a full-quality preview (lightbox loads the original hi-res file, click to zoom 1:1)
+- Downloadable full-presentation PDF on the last page — encrypted (password available from the brand owner)
 - Fully responsive; progress persists per session
 
 ## Hosting
