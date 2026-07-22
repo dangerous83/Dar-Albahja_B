@@ -19,6 +19,9 @@ An interactive, 40-page storytelling presentation of the Dar Albahja logo and br
 - Chapter menu with lock-aware jumping, progress bar and page counter
 - Drag-and-drop **and** tap-to-place logo assembly puzzle (mobile friendly)
 - Copy-to-clipboard palette, hotspot emblem anatomy, live type specimen
+- Friendly WebAudio sound effects (toggle with the 🔊 button)
+- Numbered puzzle tiles and cells for easy assembly
+- Downloadable full-presentation PDF on the last page — encrypted, opens with the same key `dena`
 - Fully responsive; progress persists per session
 
 ## Hosting
