@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Dar Albahja — The Story of a Mark</title>
+<meta name="description" content="Dar Albahja · Marrakech — an interactive 40-page brand identity storytelling experience.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-110 -110 220 220'%3E%3Crect x='-110' y='-110' width='220' height='220' fill='%231F2E4A'/%3E%3Cpolygon points='100,0 41.6,17.2 70.7,70.7 17.2,41.6 0,100 -17.2,41.6 -70.7,70.7 -41.6,17.2 -100,0 -41.6,-17.2 -70.7,-70.7 -17.2,-41.6 0,-100 17.2,-41.6 70.7,-70.7 41.6,-17.2' fill='%23D4B15C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DAR ALBAHJA · MARRAKECH — brand identity storytelling deck
+   40 pages · password gate · logo-assembly gate · responsive
+   ============================================================ */
+:root{
+  --navy:#1F2E4A; --navy-deep:#16223A; --navy-ink:#101a2e;
+  --terra:#B65A2A; --terra-soft:#c97a4e;
+  --gold:#D4B15C; --gold-soft:#e6cd8e;
+  --sand:#EDE6DA; --ivory:#F8F4EC; --paper:#FBF8F2;
+  --ink:#233047; --muted:#6b7280;
+  --serif:"Zilla Slab", Georgia, serif;
+  --sans:"Montserrat", system-ui, sans-serif;
+  --arab:"Amiri", "Zilla Slab", serif;
+  --shadow:0 24px 60px -24px rgba(22,34,58,.35);
+  --ease:cubic-bezier(.22,.9,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--sans); color:var(--ink); background:var(--ivory);
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+
+/* ---------- ambient background ---------- */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#bg .dots{position:absolute;inset:0;background-image:radial-gradient(rgba(31,46,74,.07) 1px, transparent 1.4px);background-size:26px 26px}
+#bg .star{position:absolute;opacity:.06;animation:spin 120s linear infinite}
+#bg .star.a{width:56vmax;height:56vmax;top:-24vmax;right:-20vmax;color:var(--terra)}
+#bg .star.b{width:44vmax;height:44vmax;bottom:-20vmax;left:-16vmax;color:var(--navy);animation-duration:160s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- chrome ---------- */
+#progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;background:rgba(31,46,74,.12)}
+#progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--terra),var(--gold));transition:width .5s var(--ease)}
+#brandtag{position:fixed;top:16px;left:20px;z-index:60;display:flex;align-items:center;gap:10px;font-family:var(--serif);letter-spacing:.22em;font-size:.72rem;font-weight:600;color:var(--navy);text-transform:uppercase}
+#brandtag svg{width:20px;height:20px;color:var(--gold);animation:spin 40s linear infinite}
+#chapterlabel{font-family:var(--sans);font-weight:600;font-size:.6rem;letter-spacing:.28em;color:var(--terra);border-left:1px solid rgba(31,46,74,.25);padding-left:10px}
+#menubtn{position:fixed;top:12px;right:16px;z-index:60;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);border:1px solid rgba(31,46,74,.15);border-radius:999px;padding:.5rem .95rem;font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)}
+#menubtn:hover{background:var(--navy);color:#fff}
+#controls{position:fixed;bottom:14px;right:16px;z-index:60;display:flex;gap:8px;align-items:center}
+#controls button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(31,46,74,.2);background:rgba(255,255,255,.75);backdrop-filter:blur(6px);color:var(--navy);font-size:1rem;transition:.25s}
+#controls button:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+#controls button.auto-on{background:var(--terra);color:#fff;border-color:var(--terra)}
+#counter{position:fixed;bottom:22px;left:20px;z-index:60;font-family:var(--serif);color:var(--navy);font-size:.86rem;letter-spacing:.12em}
+#counter b{font-size:1.25rem;color:var(--terra)}
+#counter span{opacity:.55}
+body.on-dark #brandtag,body.on-dark #counter{color:var(--sand)}
+body.on-dark #counter b{color:var(--gold)}
+body.on-dark #chapterlabel{color:var(--gold);border-color:rgba(237,230,218,.3)}
+body.on-dark #menubtn{background:rgba(255,255,255,.08);color:var(--sand);border-color:rgba(237,230,218,.25)}
+body.on-dark #controls button{background:rgba(255,255,255,.08);color:var(--sand);border-color:rgba(237,230,218,.25)}
+
+/* ---------- toast ---------- */
+#toast{position:fixed;left:50%;bottom:84px;transform:translate(-50%,20px);z-index:90;background:var(--navy);color:var(--sand);padding:.7rem 1.3rem;border-radius:999px;font-size:.8rem;letter-spacing:.04em;opacity:0;pointer-events:none;transition:.35s var(--ease);box-shadow:var(--shadow)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- chapter menu ---------- */
+#chapters{position:fixed;inset:0;z-index:80;background:rgba(16,26,46,.92);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.4s}
+#chapters.open{opacity:1;visibility:visible}
+#chapters .box{width:min(560px,92vw);max-height:86vh;overflow:auto;padding:2.2rem}
+#chapters h3{font-family:var(--serif);color:var(--gold);letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;margin-bottom:1.4rem;text-align:center}
+#chapters a{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.85rem .4rem;color:var(--sand);text-decoration:none;font-family:var(--serif);font-size:1.15rem;border-bottom:1px solid rgba(237,230,218,.14);cursor:pointer}
+#chapters a small{font-family:var(--sans);font-size:.62rem;letter-spacing:.2em;color:var(--gold-soft);opacity:.8}
+#chapters a:hover{color:var(--gold)}
+#chapters a.locked{opacity:.4;cursor:not-allowed}
+#chapters .close{margin:1.6rem auto 0;display:block;background:none;border:1px solid rgba(237,230,218,.3);color:var(--sand);border-radius:999px;padding:.55rem 1.6rem;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase}
+
+/* ---------- deck & slides ---------- */
+#deck{position:fixed;inset:0;z-index:10}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateX(60px);transition:opacity .65s var(--ease),transform .65s var(--ease),visibility 0s .65s}
+#deck.back .slide{transform:translateX(-60px)}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.slide-inner{width:min(1180px,94vw);max-height:100dvh;overflow-y:auto;padding:76px 8px 84px;scrollbar-width:thin}
+.slide.dark{background:radial-gradient(120% 120% at 50% 0%,#2a3c61 0%,var(--navy) 45%,var(--navy-ink) 100%);color:var(--sand)}
+.slide.paper{background:transparent}
+
+/* reveal choreography */
+[data-a]{opacity:0}
+.slide.active [data-a]{animation:rise .9s var(--ease) both;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.slide.active [data-a="fade"]{animation-name:fadein}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.slide.active [data-a="scale"]{animation-name:pop}
+@keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+
+/* typography helpers */
+.kicker{font-size:.66rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--terra);display:flex;align-items:center;gap:.8rem;margin-bottom:1.1rem}
+.kicker::before{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.dark .kicker{color:var(--gold)}
+h1.display{font-family:var(--serif);font-weight:600;font-size:clamp(2.1rem,6vw,4.3rem);line-height:1.08;color:var(--navy)}
+.dark h1.display{color:var(--sand)}
+h2.display{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4.6vw,3.2rem);line-height:1.12;color:var(--navy)}
+.dark h2.display{color:var(--sand)}
+.lede{font-size:clamp(.95rem,1.6vw,1.12rem);line-height:1.85;color:#4b5568;max-width:62ch;margin-top:1.2rem}
+.dark .lede{color:#cfd6e2}
+.gold{color:var(--gold)} .terra{color:var(--terra)}
+.arabic{font-family:var(--arab);direction:rtl}
+.pageno{position:absolute;bottom:20px;right:26px;font-family:var(--serif);font-size:.8rem;color:rgba(35,48,71,.4);letter-spacing:.15em}
+.dark .pageno{color:rgba(237,230,218,.35)}
+
+/* narrative layout */
+.story{max-width:840px;margin:0 auto}
+.story .rule{width:64px;height:2px;background:linear-gradient(90deg,var(--terra),var(--gold));margin:1.6rem 0}
+
+/* ---------- figure slides ---------- */
+.fig-slide{display:grid;grid-template-columns:1.6fr .9fr;gap:clamp(1.2rem,3vw,3rem);align-items:center}
+.fig-slide.rev{grid-template-columns:.9fr 1.6fr}
+.fig-slide.rev .caption{order:-1}
+.frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff;border:1px solid rgba(31,46,74,.08)}
+.frame img{width:100%;height:100%;object-fit:cover}
+.slide.active .frame.kb img{animation:kenburns 16s ease-out both}
+@keyframes kenburns{from{transform:scale(1.05)}to{transform:scale(1)}}
+.frame .tape{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:.58rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;padding:.35rem 1rem;border-radius:0 0 8px 8px}
+.caption h3{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,2rem);color:var(--navy);line-height:1.2;margin-bottom:.9rem}
+.caption p{font-size:.92rem;line-height:1.8;color:#4b5568}
+.caption .idx{font-family:var(--serif);font-size:3rem;color:rgba(182,90,42,.25);line-height:1;margin-bottom:.5rem}
+.caption .tags{margin-top:1.1rem;display:flex;flex-wrap:wrap;gap:.45rem}
+.caption .tags span{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);border:1px solid rgba(182,90,42,.35);padding:.3rem .7rem;border-radius:999px}
+.dark .caption h3{color:var(--sand)} .dark .caption p{color:#cfd6e2}
+/* no-peek patch over final-logo previews inside process boards */
+.nopeek{position:absolute;background:repeating-linear-gradient(45deg,var(--sand),var(--sand) 8px,#e5dccb 8px,#e5dccb 16px);border:2px dashed var(--terra);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;text-align:center;padding:.4rem;z-index:3}
+.nopeek b{font-family:var(--arab);font-size:clamp(1rem,2.4vw,1.7rem);color:var(--navy)}
+.nopeek span{font-size:clamp(.5rem,1vw,.62rem);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terra)}
+/* paired figures */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,2rem);margin-top:1.6rem}
+.pair .frame{aspect-ratio:1376/768}
+.pair.sq .frame{aspect-ratio:1;max-width:min(100%,46vh);margin-inline:auto}
+.pair figcaption{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--terra);margin-top:.7rem;text-align:center}
+
+/* ---------- gate (page 1) ---------- */
+.gate-star{width:clamp(120px,22vmin,200px);height:auto;color:var(--gold);margin:0 auto 1.6rem;animation:spin 60s linear infinite}
+.gate-box{max-width:560px;margin:0 auto;text-align:center}
+.gate-form{display:flex;gap:.6rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+.gate-form input{flex:1;min-width:220px;background:rgba(255,255,255,.07);border:1px solid rgba(237,230,218,.3);color:var(--sand);border-radius:999px;padding:.95rem 1.5rem;font-size:1rem;letter-spacing:.2em;text-align:center;outline:none;transition:.3s}
+.gate-form input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,177,92,.15)}
+.gate-form button{background:linear-gradient(120deg,var(--terra),#d07038);color:#fff;border:none;border-radius:999px;padding:.95rem 2rem;font-weight:600;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;transition:.3s}
+.gate-form button:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(182,90,42,.7)}
+.gate-hint{margin-top:1.3rem;font-size:.72rem;letter-spacing:.14em;color:rgba(237,230,218,.55)}
+.gate-err{margin-top:.9rem;font-size:.8rem;color:#ff9d7a;min-height:1.2em;font-weight:600;letter-spacing:.05em}
+.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+
+/* ---------- interactive: pillar cards ---------- */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;perspective:1200px}
+.pcard{position:relative;height:clamp(190px,30vh,260px);cursor:pointer;transform-style:preserve-3d;transition:transform .7s var(--ease)}
+.pcard.flip{transform:rotateY(180deg)}
+.pcard .f,.pcard .b{position:absolute;inset:0;border-radius:14px;padding:1.2rem;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow)}
+.pcard .f{background:linear-gradient(160deg,#fff, var(--sand));border:1px solid rgba(31,46,74,.1)}
+.pcard .f .glyph{font-size:2rem;margin-bottom:auto;color:var(--terra)}
+.pcard .f h4{font-family:var(--serif);color:var(--navy);font-size:1.15rem}
+.pcard .f small{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);font-weight:700}
+.pcard .b{background:var(--navy);color:var(--sand);transform:rotateY(180deg);font-size:.8rem;line-height:1.65;justify-content:center}
+.pcard .b b{color:var(--gold);display:block;margin-bottom:.5rem;font-family:var(--serif);font-size:1rem}
+.hint{margin-top:1.4rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-align:center}
+.dark .hint{color:rgba(237,230,218,.5)}
+
+/* ---------- interactive: svg drawings ---------- */
+.svgstage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,3rem);align-items:center}
+.svgstage .art{display:flex;align-items:center;justify-content:center}
+.svgstage svg{width:min(46vmin,420px);height:auto;overflow:visible}
+.draw path,.draw rect,.draw circle,.draw polygon{fill:none;stroke:var(--terra);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.slide.active .draw .d1{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s .3s var(--ease) forwards}
+.slide.active .draw .d2{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s 1s var(--ease) forwards}
+.slide.active .draw .d3{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s 1.7s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.slide.active .steam{opacity:0;animation:steamup 3s 2.8s ease-in-out infinite}
+@keyframes steamup{0%{opacity:0;transform:translateY(6px)}35%{opacity:.75}100%{opacity:0;transform:translateY(-16px)}}
+.slide.active .starfade{opacity:0;animation:fadein 1.4s 3s forwards}
+
+/* ---------- interactive: colour bands ---------- */
+.bands{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.band{border-radius:14px;min-height:clamp(200px,34vh,300px);padding:1.2rem;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;cursor:pointer;transition:transform .45s var(--ease),box-shadow .45s;position:relative;overflow:hidden}
+.band:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
+.band h4{font-family:var(--serif);font-size:1.1rem;margin-bottom:.3rem}
+.band p{font-size:.72rem;line-height:1.6;opacity:0;max-height:0;transition:.5s var(--ease)}
+.band:hover p,.band.open p{opacity:.92;max-height:120px}
+.band small{font-size:.62rem;letter-spacing:.18em;opacity:.75}
+.band.navy{background:linear-gradient(160deg,#2a3c61,var(--navy))}
+.band.terra{background:linear-gradient(160deg,#c96f3d,var(--terra))}
+.band.goldb{background:linear-gradient(160deg,#e2c887,var(--gold));color:var(--navy)}
+.band.sandb{background:linear-gradient(160deg,#f4efe5,var(--sand));color:var(--navy)}
+
+/* ---------- interactive: brief checklist ---------- */
+.brief{margin-top:2rem;display:grid;gap:.9rem;max-width:680px}
+.brief li{list-style:none;display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid rgba(31,46,74,.1);border-radius:12px;padding:1rem 1.2rem;box-shadow:0 10px 30px -18px rgba(22,34,58,.25)}
+.brief .tick{flex:none;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-size:.8rem}
+.brief b{font-family:var(--serif);color:var(--navy);display:block;font-size:1rem}
+.brief span{font-size:.8rem;color:#4b5568;line-height:1.6}
+
+/* ---------- wordmark slide ---------- */
+.wordmark{text-align:center}
+.wordmark .en{font-family:var(--serif);font-weight:600;color:var(--navy);font-size:clamp(2rem,7vw,4.6rem);letter-spacing:.14em}
+.slide.active .wordmark .en{animation:track 1.6s var(--ease) both .3s}
+@keyframes track{from{letter-spacing:.5em;opacity:0}to{letter-spacing:.14em;opacity:1}}
+.wordmark .loc{font-size:clamp(.7rem,1.6vw,1rem);letter-spacing:.65em;color:var(--terra);font-weight:600;text-transform:uppercase;margin-top:.8rem;text-indent:.65em}
+.wordmark .ar{font-family:var(--arab);color:var(--navy);font-size:clamp(1.6rem,4.6vw,2.9rem);margin-top:1rem}
+
+/* ---------- puzzle (page 17) ---------- */
+.pz-wrap{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.2rem,3vw,3rem);align-items:center;justify-content:center}
+.pz-left{text-align:left;max-width:330px}
+#pzBoard{position:relative;width:min(58vmin,430px);aspect-ratio:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6px;padding:6px;background:rgba(31,46,74,.08);border:2px dashed rgba(31,46,74,.28);border-radius:16px;transition:.6s}
+#pzBoard::before{content:"";position:absolute;inset:6px;background:url("web/emblem-puzzle.jpg") center/cover;opacity:.07;border-radius:10px;pointer-events:none}
+.pz-slot{position:relative;border-radius:8px;background:rgba(255,255,255,.55);border:1px solid rgba(31,46,74,.14);transition:.25s}
+.pz-slot.hot{background:rgba(212,177,92,.35);border-color:var(--gold)}
+.pz-slot.bad{animation:shake .4s;background:rgba(182,90,42,.25)}
+.pz-slot.done{border-color:transparent;background:none}
+.pz-img{background-image:url("web/emblem-puzzle.jpg");background-size:300% 300%;background-repeat:no-repeat}
+.pz-slot .pz-img{position:absolute;inset:0;border-radius:8px;animation:pop .4s var(--ease)}
+#pzTray{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.4rem;max-width:430px}
+.pz-piece{width:clamp(54px,9vmin,74px);aspect-ratio:1;border-radius:8px;box-shadow:0 8px 20px -8px rgba(22,34,58,.45);cursor:grab;border:2px solid #fff;transition:transform .25s;touch-action:none}
+.pz-piece:hover{transform:scale(1.08)}
+.pz-piece.sel{outline:3px solid var(--gold);transform:scale(1.1)}
+.pz-piece.gone{display:none}
+#pzGhost{position:fixed;z-index:99;pointer-events:none;width:90px;aspect-ratio:1;border-radius:8px;box-shadow:0 18px 40px -10px rgba(22,34,58,.6);display:none}
+#pzBoard.solved{border-color:var(--gold);background:none;box-shadow:0 0 0 6px rgba(212,177,92,.25),0 30px 80px -30px rgba(212,177,92,.55);gap:0;padding:0}
+#pzBoard.solved .pz-slot{border-radius:0}
+#pzBoard.solved .pz-slot .pz-img{border-radius:0}
+#pzCount{font-family:var(--serif);color:var(--terra);font-size:1.1rem}
+.pz-cta{margin-top:1.5rem;display:inline-block;background:linear-gradient(120deg,var(--terra),#d07038);color:#fff;border:none;border-radius:999px;padding:1rem 2.2rem;font-weight:600;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;opacity:.35;pointer-events:none;transition:.4s}
+.pz-cta.ready{opacity:1;pointer-events:auto;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(212,177,92,.5)}50%{box-shadow:0 0 0 14px rgba(212,177,92,0)}}
+.sparkle{position:fixed;z-index:95;pointer-events:none;color:var(--gold);animation:spark 1.2s ease-out forwards;font-size:1.2rem}
+@keyframes spark{from{opacity:1;transform:translate(0,0) scale(.6) rotate(0)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.5) rotate(180deg)}}
+
+/* ---------- reveal ---------- */
+.reveal-stage{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.reveal-logo{width:min(52vmin,420px);border-radius:18px;box-shadow:0 40px 120px -30px rgba(0,0,0,.65);position:relative;z-index:2}
+.slide.active .reveal-logo{animation:revealpop 1.6s var(--ease) both .4s}
+@keyframes revealpop{0%{opacity:0;transform:scale(.7) rotate(-6deg);filter:blur(14px)}60%{filter:blur(0)}100%{opacity:1;transform:none}}
+.halo{position:absolute;top:34%;left:50%;width:80vmin;height:80vmin;transform:translate(-50%,-50%);z-index:1;color:var(--gold);opacity:.16;animation:spin 70s linear infinite}
+
+/* ---------- hotspots ---------- */
+.hs-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,3rem);align-items:center}
+.hs-stage{position:relative;width:min(56vmin,440px);margin:0 auto}
+.hs-stage img{border-radius:14px;box-shadow:var(--shadow)}
+.hs-dot{position:absolute;width:34px;height:34px;border-radius:50%;border:none;background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;display:grid;place-items:center;transform:translate(-50%,-50%);box-shadow:0 0 0 6px rgba(182,90,42,.25);transition:.3s}
+.hs-dot:hover{transform:translate(-50%,-50%) scale(1.15)}
+.hs-dot.on{background:var(--navy);box-shadow:0 0 0 6px rgba(31,46,74,.3)}
+.hs-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(182,90,42,.5);animation:pulse2 2s infinite}
+@keyframes pulse2{0%{transform:scale(1);opacity:1}100%{transform:scale(1.8);opacity:0}}
+#hsPanel{background:#fff;border-radius:14px;border:1px solid rgba(31,46,74,.1);box-shadow:var(--shadow);padding:1.6rem;min-height:190px}
+#hsPanel .idx{font-family:var(--serif);color:var(--gold);font-size:2rem;line-height:1}
+#hsPanel h4{font-family:var(--serif);color:var(--navy);font-size:1.3rem;margin:.4rem 0 .6rem}
+#hsPanel p{font-size:.88rem;line-height:1.75;color:#4b5568}
+
+/* ---------- palette spec ---------- */
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.chip{border-radius:14px;overflow:hidden;background:#fff;border:1px solid rgba(31,46,74,.1);box-shadow:0 14px 40px -20px rgba(22,34,58,.3);cursor:pointer;transition:transform .35s var(--ease)}
+.chip:hover{transform:translateY(-8px)}
+.chip .sw{height:clamp(90px,16vh,130px);position:relative}
+.chip .sw::after{content:"⧉ copy";position:absolute;right:10px;bottom:8px;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);opacity:0;transition:.3s}
+.chip:hover .sw::after{opacity:1}
+.chip .meta{padding:.9rem 1rem}
+.chip .meta b{font-family:var(--serif);color:var(--navy);display:block;font-size:.95rem}
+.chip .meta code{font-size:.72rem;color:var(--terra);font-weight:600;letter-spacing:.08em}
+.chip .meta small{display:block;font-size:.66rem;color:var(--muted);margin-top:.3rem;line-height:1.5}
+.ratio{margin-top:1.6rem;height:14px;border-radius:999px;overflow:hidden;display:flex}
+.ratio i{height:100%}
+.ratio-l{display:flex;justify-content:space-between;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.5rem}
+
+/* ---------- typography slide ---------- */
+.typo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,3rem)}
+.spec{background:#fff;border:1px solid rgba(31,46,74,.1);border-radius:14px;padding:1.6rem;box-shadow:0 14px 40px -20px rgba(22,34,58,.3)}
+.spec small{font-size:.6rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--terra)}
+.spec .big{font-size:clamp(1.8rem,4vw,3rem);color:var(--navy);line-height:1.15;margin:.6rem 0}
+.spec.z .big{font-family:var(--serif);font-weight:600}
+.spec.m .big{font-family:var(--sans);font-weight:600}
+.spec p{font-size:.8rem;color:#4b5568;line-height:1.7}
+.spec .abc{margin-top:.7rem;font-size:.85rem;color:var(--muted);word-break:break-all}
+.spec.z .abc{font-family:var(--serif)} .spec.m .abc{font-family:var(--sans)}
+#typeplay{grid-column:1/-1;background:var(--navy);color:var(--sand);border-radius:14px;padding:1.6rem;box-shadow:var(--shadow)}
+#typeplay input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(237,230,218,.25);color:var(--sand);border-radius:10px;padding:.8rem 1.1rem;font-size:.95rem;outline:none;margin-top:.8rem}
+#typeplay input:focus{border-color:var(--gold)}
+#tpOut{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.6rem);color:var(--gold-soft);margin-top:1rem;min-height:1.3em;line-height:1.25;overflow-wrap:anywhere}
+#tpOut2{font-family:var(--sans);font-weight:600;letter-spacing:.3em;text-transform:uppercase;font-size:clamp(.7rem,1.6vw,1rem);color:var(--sand);opacity:.85;margin-top:.4rem;overflow-wrap:anywhere}
+
+/* ---------- website slide ---------- */
+.web-slide .devbar{display:flex;gap:.5rem;justify-content:center;margin:1.4rem 0}
+.devbar button{border:1px solid rgba(31,46,74,.2);background:#fff;border-radius:999px;padding:.5rem 1.2rem;font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);transition:.3s}
+.devbar button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+#device{margin:0 auto;background:#0d1524;border-radius:22px;padding:14px;box-shadow:var(--shadow);transition:width .6s var(--ease);width:min(920px,92vw);max-width:92vw}
+#device .cam{width:60px;height:6px;border-radius:99px;background:#28344d;margin:0 auto 10px}
+#device .screen{background:var(--paper);border-radius:12px;overflow:hidden;height:min(54vh,470px);overflow-y:auto;scrollbar-width:thin}
+#device[data-mode="tablet"]{width:min(640px,92vw)}
+#device[data-mode="phone"]{width:min(380px,92vw)}
+/* mini site */
+.site{font-family:var(--sans)}
+.site .nv{display:flex;align-items:center;gap:.7rem;padding:.8rem 1.2rem;background:#fff;border-bottom:1px solid rgba(31,46,74,.1);position:sticky;top:0;z-index:5}
+.site .nv img{width:30px;height:30px;border-radius:50%}
+.site .nv b{font-family:var(--serif);letter-spacing:.14em;color:var(--navy);font-size:.8rem}
+.site .nv nav{margin-left:auto;display:flex;gap:1rem;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4b5568}
+.site .nv .rsv{background:var(--terra);color:#fff;border:none;border-radius:999px;padding:.45rem 1rem;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+.site .burger{display:none;margin-left:auto;background:none;border:none;font-size:1.1rem;color:var(--navy)}
+.site .hero{position:relative;background:linear-gradient(140deg,#2a3c61,var(--navy) 60%,var(--navy-ink));color:var(--sand);padding:2.6rem 1.6rem;text-align:center;overflow:hidden}
+.site .hero svg{position:absolute;width:340px;height:340px;top:-90px;right:-90px;color:var(--gold);opacity:.12;animation:spin 60s linear infinite}
+.site .hero img{width:74px;margin:0 auto .9rem;border-radius:50%;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
+.site .hero h1{font-family:var(--serif);font-size:1.7rem;font-weight:600}
+.site .hero .ar{font-family:var(--arab);color:var(--gold-soft);font-size:1.05rem;margin-top:.3rem}
+.site .hero p{font-size:.74rem;line-height:1.7;opacity:.85;max-width:44ch;margin:.8rem auto 1.2rem}
+.site .hero .cta{display:inline-block;background:linear-gradient(120deg,var(--terra),#d07038);color:#fff;border:none;border-radius:999px;padding:.7rem 1.5rem;font-size:.64rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.site .menu{padding:1.6rem 1.2rem;background:var(--ivory)}
+.site .menu h2{font-family:var(--serif);color:var(--navy);text-align:center;font-size:1.15rem;margin-bottom:1rem}
+.site .dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.site .dish{background:#fff;border:1px solid rgba(31,46,74,.08);border-radius:12px;padding:1rem;text-align:center;box-shadow:0 10px 26px -18px rgba(22,34,58,.35)}
+.site .dish .em{font-size:1.5rem}
+.site .dish b{display:block;font-family:var(--serif);color:var(--navy);font-size:.82rem;margin:.4rem 0 .2rem}
+.site .dish span{font-size:.64rem;color:#6b7280;line-height:1.5;display:block}
+.site .dish .pr{color:var(--terra);font-weight:700;font-size:.7rem;display:block;margin-top:.5rem}
+.site .strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--navy);color:var(--sand);text-align:center;padding:1.1rem;gap:.6rem}
+.site .strip b{display:block;color:var(--gold);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.25rem}
+.site .strip span{font-size:.66rem;opacity:.85}
+.site .ft{background:var(--navy-ink);color:rgba(237,230,218,.75);text-align:center;padding:1rem;font-size:.6rem;letter-spacing:.1em}
+.site .ft .arabic{font-family:var(--arab);font-size:.85rem;color:var(--gold-soft)}
+/* fake responsiveness driven by device mode */
+#device[data-mode="tablet"] .dishes{grid-template-columns:repeat(3,1fr)}
+#device[data-mode="tablet"] .nv nav{display:none}
+#device[data-mode="tablet"] .burger{display:block}
+#device[data-mode="phone"] .dishes{grid-template-columns:1fr}
+#device[data-mode="phone"] .nv nav{display:none}
+#device[data-mode="phone"] .burger{display:block}
+#device[data-mode="phone"] .strip{grid-template-columns:1fr}
+#device[data-mode="phone"] .hero h1{font-size:1.3rem}
+
+/* ---------- finale ---------- */
+.fin-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-top:2rem;opacity:.9}
+.fin-grid img{border-radius:8px;aspect-ratio:16/9;object-fit:cover;filter:saturate(.9)}
+.fin-btns{display:flex;gap:.8rem;justify-content:center;margin-top:2.2rem;flex-wrap:wrap}
+.fin-btns button{border-radius:999px;padding:.85rem 1.8rem;font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(237,230,218,.35);background:none;color:var(--sand);transition:.3s}
+.fin-btns button:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .fig-slide,.fig-slide.rev{grid-template-columns:1fr}
+  .fig-slide.rev .caption{order:0}
+  .svgstage,.hs-wrap,.typo{grid-template-columns:1fr}
+  .cards4{grid-template-columns:repeat(2,1fr)}
+  .bands{grid-template-columns:repeat(2,1fr)}
+  .chips{grid-template-columns:repeat(2,1fr)}
+  .pz-wrap{grid-template-columns:1fr;justify-items:center}
+  .pz-left{text-align:center;max-width:none}
+  #pzTray{justify-content:center}
+  .fin-grid{grid-template-columns:repeat(4,1fr)}
+  #brandtag #chapterlabel{display:none}
+}
+@media (max-width:560px){
+  .pair{grid-template-columns:1fr}
+  .cards4{grid-template-columns:1fr 1fr}
+  .site .dishes{grid-template-columns:1fr}
+  #counter{bottom:18px}
+  .fin-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.15s !important}
+}
+</style>
+</head>
+<body class="on-dark">
+
+<!-- shared symbols -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="star8" viewBox="-110 -110 220 220">
+      <polygon points="100,0 41.6,17.2 70.7,70.7 17.2,41.6 0,100 -17.2,41.6 -70.7,70.7 -41.6,17.2 -100,0 -41.6,-17.2 -70.7,-70.7 -17.2,-41.6 0,-100 17.2,-41.6 70.7,-70.7 41.6,-17.2"
+        fill="none" stroke="currentColor" stroke-width="4"/>
+      <polygon points="45,0 18.7,7.7 31.8,31.8 7.7,18.7 0,45 -7.7,18.7 -31.8,31.8 -18.7,7.7 -45,0 -18.7,-7.7 -31.8,-31.8 -7.7,-18.7 0,-45 7.7,-18.7 31.8,-31.8 18.7,-7.7"
+        fill="none" stroke="currentColor" stroke-width="3"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="bg" aria-hidden="true">
+  <div class="dots"></div>
+  <svg class="star a"><use href="#star8"/></svg>
+  <svg class="star b"><use href="#star8"/></svg>
+</div>
+
+<div id="progress"><i></i></div>
+<div id="brandtag"><svg><use href="#star8"/></svg><span>Dar&nbsp;Albahja</span><span id="chapterlabel">The Door</span></div>
+<button id="menubtn" aria-label="Open chapters">Chapters</button>
+<div id="counter"><b>01</b> <span>/ 40</span></div>
+<div id="controls">
+  <button id="autobtn" title="Auto-play" aria-label="Toggle autoplay">▶</button>
+  <button id="prevbtn" title="Previous page" aria-label="Previous page">←</button>
+  <button id="nextbtn" title="Next page" aria-label="Next page">→</button>
+</div>
+<div id="toast" role="status"></div>
+
+<div id="chapters" role="dialog" aria-label="Chapters">
+  <div class="box">
+    <h3>✦ The Story in Seven Chapters ✦</h3>
+    <a data-go="1"><span>The Door</span><small>page 01</small></a>
+    <a data-go="2"><span>Act I — The City</span><small>pages 02–09</small></a>
+    <a data-go="10"><span>Act II — The Hand</span><small>pages 10–16</small></a>
+    <a data-go="17"><span>Act III — The Assembly</span><small>pages 17–19</small></a>
+    <a data-go="20"><span>Act IV — The Identity</span><small>pages 20–31</small></a>
+    <a data-go="32"><span>Act V — Into the World</span><small>pages 32–39</small></a>
+    <a data-go="40"><span>Shukran</span><small>page 40</small></a>
+    <button class="close" id="chclose">Close</button>
+  </div>
+</div>
+
+<main id="deck">
+
+<!-- ================= 01 · PASSWORD GATE ================= -->
+<section class="slide dark" id="s1">
+  <div class="slide-inner">
+    <div class="gate-box">
+      <svg class="gate-star" viewBox="-110 -110 220 220" data-a="scale"><use href="#star8" x="-110" y="-110" width="220" height="220"/></svg>
+      <p class="kicker" style="justify-content:center;--d:.15s" data-a>A private unveiling · Marrakech</p>
+      <h1 class="display" data-a style="--d:.3s">Every riad hides its joy<br>behind a door.</h1>
+      <p class="lede" data-a style="--d:.5s;margin-inline:auto;text-align:center">This presentation is reserved for invited guests.
+      Whisper the key, and the House of Joy will let you in.</p>
+      <form class="gate-form" id="gateForm" data-a style="--d:.7s">
+        <input id="gateInput" type="password" placeholder="enter the key…" autocomplete="off" aria-label="Password">
+        <button type="submit">Open the door</button>
+      </form>
+      <p class="gate-err" id="gateErr"></p>
+      <p class="gate-hint" data-a style="--d:.9s">✶ the key was given with your invitation ✶</p>
+    </div>
+  </div>
+  <span class="pageno">01</span>
+</section>
+
+<!-- ================= 02 · OPENING ================= -->
+<section class="slide dark" id="s2">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center">
+      <p class="kicker" style="justify-content:center" data-a>Dar Albahja · Brand identity story</p>
+      <h1 class="display" data-a style="--d:.25s">Before the mark,<br>there was a <em class="gold" style="font-style:normal">city</em>.</h1>
+      <p class="lede" data-a style="--d:.5s;margin-inline:auto">Forty pages. One emblem. But we will not show it to you —
+      not yet. A good logo is earned the way a good meal is: slowly, with intention.
+      By page seventeen, you will build it with your own hands.</p>
+      <p class="hint" data-a style="--d:.8s">use → arrow, swipe, or the buttons below</p>
+    </div>
+  </div>
+  <span class="pageno">02</span>
+</section>
+
+<!-- ================= 03 · PROLOGUE ================= -->
+<section class="slide paper" id="s3">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center">
+      <p class="kicker" style="justify-content:center" data-a>Prologue</p>
+      <div class="arabic" data-a="scale" style="--d:.3s;font-size:clamp(4rem,14vw,9rem);color:var(--terra);line-height:1.2">البَهجة</div>
+      <h2 class="display" data-a style="--d:.55s">Al-Bahja — <em style="font-style:italic">joy.</em></h2>
+      <p class="lede" data-a style="--d:.75s;margin-inline:auto">In Arabic, <b>al-bahja</b> is not private happiness — it is delight that must be shared.
+      For centuries Marrakech has been called <b>Madīnat al-Bahja</b>, the City of Joy.
+      <br><b>Dar Albahja</b> — <span class="arabic" style="display:inline">دار البهجة</span> — means the <b>House of Joy</b>:
+      a promise that the city's joy will be served at your table.</p>
+    </div>
+  </div>
+  <span class="pageno">03</span>
+</section>
+
+<!-- ================= 04 · THE CITY ================= -->
+<section class="slide paper" id="s4">
+  <div class="slide-inner">
+    <div class="story">
+      <p class="kicker" data-a>Act I — The City · 01</p>
+      <h2 class="display" data-a style="--d:.2s">Marrakech doesn't whisper.<br>It sings.</h2>
+      <div class="rule" data-a style="--d:.35s"></div>
+      <p class="lede" data-a style="--d:.5s">Ochre walls that hold the evening light. Souks that smell of cumin,
+      leather and orange blossom. Lanterns that carve constellations into plaster ceilings, and doors —
+      always doors — that promise a garden behind every wall. A brand born here cannot be minimal for
+      minimalism's sake. It must be <b>generous, patterned and warm</b>, like the city itself.</p>
+      <div class="caption tags" data-a style="--d:.75s" >
+        <span>Ornament</span><span>Craft</span><span>Cuisine</span><span>Welcome</span><span>Geometry</span><span>Light</span>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">04</span>
+</section>
+
+<!-- ================= 05 · FOUR PILLARS (interactive) ================= -->
+<section class="slide paper" id="s5">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act I — The City · 02</p>
+      <h2 class="display" data-a style="--d:.2s">Four pillars hold up this house.</h2>
+      <div class="cards4">
+        <div class="pcard" data-a style="--d:.35s"><div class="f"><div class="glyph">✦</div><small>Pillar 01</small><h4>Geometry</h4></div>
+          <div class="b"><b>The math of infinity</b>Zellige tilework repeats an eight-fold order to suggest the endless. Our emblem inherits that discipline.</div></div>
+        <div class="pcard" data-a style="--d:.5s"><div class="f"><div class="glyph">۞</div><small>Pillar 02</small><h4>Culture</h4></div>
+          <div class="b"><b>A thousand-year craft</b>Carved plaster, cedar, brass and thread — the medina's artisans give the brand its texture and patience.</div></div>
+        <div class="pcard" data-a style="--d:.65s"><div class="f"><div class="glyph">◮</div><small>Pillar 03</small><h4>Cuisine</h4></div>
+          <div class="b"><b>The tagine's promise</b>Slow food under a conical lid. The most recognisable silhouette in Moroccan cooking — remember it.</div></div>
+        <div class="pcard" data-a style="--d:.8s"><div class="f"><div class="glyph">☾</div><small>Pillar 04</small><h4>Hospitality</h4></div>
+          <div class="b"><b>Mint tea, poured high</b>A guest is a gift. Every colour and curve of this identity must feel like an open door.</div></div>
+      </div>
+      <p class="hint" data-a style="--d:.95s">tap each card to turn it over</p>
+    </div>
+  </div>
+  <span class="pageno">05</span>
+</section>
+
+<!-- ================= 06 · THE TAGINE (svg draw) ================= -->
+<section class="slide paper" id="s6">
+  <div class="slide-inner">
+    <div class="svgstage">
+      <div class="art" data-a="fade" style="--d:.2s">
+        <svg class="draw" viewBox="0 0 240 210" aria-label="Tagine line drawing">
+          <path class="steam" d="M100 6 q-8 10 0 20 q8 10 0 18" stroke="#D4B15C" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="steam" d="M140 2 q-8 10 0 20 q8 10 0 18" style="animation-delay:3.4s" stroke="#D4B15C" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle class="d1" cx="120" cy="52" r="9" stroke="#D4B15C"/>
+          <path class="d2" d="M120 61 L44 138 M120 61 L196 138 M44 138 Q120 158 196 138"/>
+          <path class="d3" d="M32 146 Q38 175 74 181 L166 181 Q202 175 208 146 M32 146 Q120 166 208 146"/>
+        </svg>
+      </div>
+      <div class="story">
+        <p class="kicker" data-a>Act I — The City · 03</p>
+        <h2 class="display" data-a style="--d:.2s">One silhouette says<br>“Morocco” at a glance.</h2>
+        <div class="rule" data-a style="--d:.35s"></div>
+        <p class="lede" data-a style="--d:.5s">The <b>tagine</b>: a shallow dish, a conical lid, and inside — patience.
+        Steam circles until lamb falls from the bone and apricots melt into amber.
+        It is cuisine, ceremony and architecture in one object.</p>
+        <p class="lede" data-a style="--d:.7s"><b class="terra">Remember this shape.</b> Before this story ends you will
+        find it hiding in plain sight — eight times over.</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">06</span>
+</section>
+
+<!-- ================= 07 · EIGHT-FOLD GEOMETRY (svg construction) ================= -->
+<section class="slide paper" id="s7">
+  <div class="slide-inner">
+    <div class="svgstage">
+      <div class="story">
+        <p class="kicker" data-a>Act I — The City · 04</p>
+        <h2 class="display" data-a style="--d:.2s">Rotate a square,<br>and a star is born.</h2>
+        <div class="rule" data-a style="--d:.35s"></div>
+        <p class="lede" data-a style="--d:.5s">Lay one square over another, turned 45 degrees, and you get the
+        <b>khatam</b> — the eight-point star that seeds every zellige wall in the medina.
+        Eight is the rhythm of Moroccan ornament: eight petals, eight gates, eight directions of welcome.</p>
+        <p class="lede" data-a style="--d:.7s"><b class="terra">Eight will be the rhythm of this mark.</b></p>
+      </div>
+      <div class="art" data-a="fade" style="--d:.2s">
+        <svg class="draw" viewBox="-120 -120 240 240" aria-label="Eight point star construction">
+          <rect class="d1" x="-74" y="-74" width="148" height="148" rx="2"/>
+          <rect class="d2" x="-74" y="-74" width="148" height="148" rx="2" transform="rotate(45)" stroke="#1F2E4A"/>
+          <g class="starfade" color="#D4B15C"><use href="#star8" x="-110" y="-110" width="220" height="220"/></g>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">07</span>
+</section>
+
+<!-- ================= 08 · COLOURS OF THE CITY (interactive bands) ================= -->
+<section class="slide paper" id="s8">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act I — The City · 05</p>
+      <h2 class="display" data-a style="--d:.2s">We didn't choose colours.<br>The city lent them to us.</h2>
+      <div class="bands">
+        <div class="band navy" data-a style="--d:.35s"><h4>Deep Navy</h4><small>the hour after sunset</small><p>The sky over the Koutoubia minaret, minutes after the maghrib call — steadiness, elegance, heritage.</p></div>
+        <div class="band terra" data-a style="--d:.5s"><h4>Terracotta</h4><small>the walls themselves</small><p>Marrakech is the Red City: ochre ramparts, clay tagines, warm earth. This is the colour of craft.</p></div>
+        <div class="band goldb" data-a style="--d:.65s"><h4>Warm Gold</h4><small>saffron &amp; lantern light</small><p>Saffron threads, brass lanterns, honeyed pastry — a note of prestige, used sparingly, like the spice.</p></div>
+        <div class="band sandb" data-a style="--d:.8s"><h4>Soft Sand</h4><small>the riad's silence</small><p>Lime plaster and morning light in a quiet courtyard. The breathing room every ornament needs.</p></div>
+      </div>
+      <p class="hint" data-a style="--d:.95s">hover or tap a colour to hear its story</p>
+    </div>
+  </div>
+  <span class="pageno">08</span>
+</section>
+
+<!-- ================= 09 · THE BRIEF ================= -->
+<section class="slide paper" id="s9">
+  <div class="slide-inner">
+    <div class="story">
+      <p class="kicker" data-a>Act I — The City · 06</p>
+      <h2 class="display" data-a style="--d:.2s">The brief, in four promises.</h2>
+      <ul class="brief">
+        <li data-a style="--d:.35s"><span class="tick">✓</span><span><b>Feel like Marrakech — without cliché.</b><span>No camels, no cursive “exotic” fonts. Real geometry, real craft.</span></span></li>
+        <li data-a style="--d:.5s"><span class="tick">✓</span><span><b>Carry the cuisine inside the geometry.</b><span>The mark itself should hint at what the kitchen promises.</span></span></li>
+        <li data-a style="--d:.65s"><span class="tick">✓</span><span><b>Speak two languages as one voice.</b><span>English and Arabic, equal partners — دار البهجة beside DAR ALBAHJA.</span></span></li>
+        <li data-a style="--d:.8s"><span class="tick">✓</span><span><b>Grow old gracefully.</b><span>It must engrave, embroider, glow in neon and shrink to a favicon.</span></span></li>
+      </ul>
+      <p class="lede" data-a style="--d:.95s"><b class="terra">The pencil takes it from here.</b></p>
+    </div>
+  </div>
+  <span class="pageno">09</span>
+</section>
+
+<!-- ================= 10 · ACT II OPEN ================= -->
+<section class="slide dark" id="s10">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center">
+      <p class="kicker" style="justify-content:center" data-a>Act II — The Hand</p>
+      <h1 class="display" data-a style="--d:.25s">It began, as always,<br>with a pencil.</h1>
+      <p class="lede" data-a style="--d:.5s;margin-inline:auto">A compass, a rule, a cream sheet of paper.
+      Before a single pixel, the emblem lived as graphite: an eight-fold grid drawn the way
+      the old maâlems drew zellige — from the centre, outward.</p>
+    </div>
+  </div>
+  <span class="pageno">10</span>
+</section>
+
+<!-- ================= 11 · CONSTRUCTION PHOTO ================= -->
+<section class="slide paper" id="s11">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1376/768" data-a="scale">
+        <span class="tape">01 · Construction</span>
+        <img src="web/Story telling of logo 3.jpg" alt="Pencil construction of the emblem on an eight-fold radial grid, drawn with compass and rule" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">11</div>
+        <h3 data-a style="--d:.4s">Compass, rule,<br>and an 8-fold radial grid.</h3>
+        <p data-a style="--d:.55s">The first construction sheet. Faint compass arcs divide the circle into eight equal
+        segments; inside each one, a small study of the tagine motif. Serif capitals are tested for the name.
+        Nothing digital yet — just intent.</p>
+        <div class="tags" data-a style="--d:.7s"><span>8-fold grid</span><span>compass + rule</span><span>tagine study</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">11</span>
+</section>
+
+<!-- ================= 12 · CONCEPT BOARD ================= -->
+<section class="slide paper" id="s12">
+  <div class="slide-inner">
+    <div class="fig-slide rev">
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">12</div>
+        <h3 data-a style="--d:.4s">Concept &amp; inspiration —<br>the exploration sheet.</h3>
+        <p data-a style="--d:.55s">Geometric explorations march across the page: circles become octagons, octagons become
+        rosettes. Below, the tagine is simplified stroke by stroke until it is one honest line.
+        The direction preview stays covered — <b>you'll earn it at page 18</b>.</p>
+        <div class="tags" data-a style="--d:.7s"><span>geometric exploration</span><span>motif development</span><span>tagine studies</span></div>
+      </div>
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Logo story · 01</span>
+        <img src="web/sketch draw and inspiration.jpg" alt="Concept and inspiration board with geometric explorations, motif development and tagine studies" loading="lazy">
+        <div class="nopeek" style="left:72.5%;top:76%;width:24.5%;height:19.5%"><b>؟</b><span>no peeking yet</span></div>
+      </figure>
+    </div>
+  </div>
+  <span class="pageno">12</span>
+</section>
+
+<!-- ================= 13 · REFINEMENT BOARD ================= -->
+<section class="slide paper" id="s13">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Logo story · 02</span>
+        <img src="web/Sketch element.jpg" alt="Refinement and construction board: grid construction, line weight and balance, wordmark exploration and colour logic" loading="lazy">
+        <div class="nopeek" style="left:65%;top:57%;width:34%;height:40%"><b>؟</b><span>unlocks at page 18</span></div>
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">13</div>
+        <h3 data-a style="--d:.4s">Refinement — where<br>discipline enters.</h3>
+        <p data-a style="--d:.55s">The grid is rebuilt cleanly; line weights are balanced until the knot reads at any size.
+        Four wordmark lockups are auditioned. A colour logic appears for the first time:
+        deep navy for heritage, terracotta for warmth, warm gold for hospitality.</p>
+        <div class="tags" data-a style="--d:.7s"><span>line weight</span><span>wordmark exploration</span><span>colour logic</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">13</span>
+</section>
+
+<!-- ================= 14 · VECTOR REFINEMENT PHOTO ================= -->
+<section class="slide paper" id="s14">
+  <div class="slide-inner">
+    <div class="fig-slide rev">
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">14</div>
+        <h3 data-a style="--d:.4s">Half ink, half fire —<br>the linework meets colour.</h3>
+        <p data-a style="--d:.55s">On the screen, the sketch is vectorised with radial symmetry ×8.
+        One half still wears its wireframe; the other blushes into navy and terracotta.
+        This is the moment a drawing becomes a <b>mark</b>.</p>
+        <div class="tags" data-a style="--d:.7s"><span>vectorising linework</span><span>radial symmetry ×8</span></div>
+      </div>
+      <figure class="frame kb" style="aspect-ratio:1376/768" data-a="scale">
+        <span class="tape">02 · Refinement</span>
+        <img src="web/Story telling of logo 2.jpg" alt="Vectorising the emblem on screen, half wireframe and half coloured, with pen tablet" loading="lazy">
+      </figure>
+    </div>
+  </div>
+  <span class="pageno">14</span>
+</section>
+
+<!-- ================= 15 · WORDMARK ================= -->
+<section class="slide paper" id="s15">
+  <div class="slide-inner">
+    <div class="story wordmark" style="max-width:900px">
+      <p class="kicker" style="justify-content:center" data-a>Act II — The Hand · 06</p>
+      <div class="en" data-a="fade">DAR ALBAHJA</div>
+      <div class="loc" data-a style="--d:.6s">Marrakech</div>
+      <div class="ar arabic" data-a style="--d:.85s">دار البهجة مراكش</div>
+      <div class="rule" data-a style="--d:1s;margin-inline:auto"></div>
+      <p class="lede" data-a style="--d:1.1s;margin-inline:auto;text-align:center">Classic serif capitals carry heritage and confidence;
+      a terracotta locator line places us on the map; and the Arabic name — set with equal care —
+      completes the signature. <b>Two scripts, one voice.</b></p>
+    </div>
+  </div>
+  <span class="pageno">15</span>
+</section>
+
+<!-- ================= 16 · READY ================= -->
+<section class="slide dark" id="s16">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center">
+      <p class="kicker" style="justify-content:center" data-a>Act II — The Hand · 07</p>
+      <h1 class="display" data-a style="--d:.25s">The pieces are<br>on the table.</h1>
+      <p class="lede" data-a style="--d:.5s;margin-inline:auto">Eight tagines. Two interlaced squares. One golden star.
+      You have now seen everything the emblem is made of — its city, its geometry, its colours, its hand.</p>
+      <p class="lede" data-a style="--d:.7s;margin-inline:auto"><b class="gold">Now prove it.</b> On the next page, the emblem arrives in pieces.
+      Only those who can assemble it may see the identity revealed.</p>
+      <p class="hint" data-a style="--d:.9s">continue when you're ready →</p>
+    </div>
+  </div>
+  <span class="pageno">16</span>
+</section>
+
+<!-- ================= 17 · PUZZLE GATE ================= -->
+<section class="slide paper" id="s17">
+  <div class="slide-inner">
+    <div class="pz-wrap">
+      <div class="pz-left">
+        <p class="kicker" data-a>Act III — The Assembly</p>
+        <h2 class="display" data-a style="--d:.2s">Assemble<br>the emblem.</h2>
+        <p class="lede" data-a style="--d:.4s">Drag each tile to its cell — or tap a tile, then tap its cell.
+        The faint pattern beneath will guide you.</p>
+        <p data-a style="--d:.55s;margin-top:1rem"><span id="pzCount">0 / 9</span> <span style="font-size:.72rem;color:var(--muted)">tiles placed</span></p>
+        <button class="pz-cta" id="pzContinue">Reveal the identity →</button>
+      </div>
+      <div>
+        <div id="pzBoard" data-a="scale" style="--d:.3s" aria-label="Logo assembly board"></div>
+        <div id="pzTray" data-a style="--d:.5s" aria-label="Puzzle pieces tray"></div>
+      </div>
+    </div>
+  </div>
+  <div id="pzGhost" class="pz-img"></div>
+  <span class="pageno">17</span>
+</section>
+
+<!-- ================= 18 · REVEAL ================= -->
+<section class="slide dark" id="s18">
+  <div class="slide-inner">
+    <div class="reveal-stage">
+      <svg class="halo" viewBox="-110 -110 220 220" aria-hidden="true"><use href="#star8" x="-110" y="-110" width="220" height="220"/></svg>
+      <p class="kicker" style="justify-content:center" data-a>Act III — The Reveal</p>
+      <img class="reveal-logo" src="web/logo-enar-1600.jpg" alt="Dar Albahja Marrakech full logo: eight-fold geometric emblem with tagine motifs above bilingual wordmark">
+      <h2 class="display" data-a style="--d:1.3s;margin-top:1.6rem">The House of Joy has a face.</h2>
+      <p class="lede" data-a style="--d:1.6s;margin-inline:auto;text-align:center">Eight-fold Moroccan geometry. Eight tagine silhouettes in
+      quiet rotation. A golden khatam star at the heart. And a name that speaks twice — once in serif, once in script.</p>
+    </div>
+  </div>
+  <span class="pageno">18</span>
+</section>
+
+<!-- ================= 19 · FINAL IDENTITY BOARD ================= -->
+<section class="slide paper" id="s19">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1376/768" data-a="scale">
+        <span class="tape">03 · Final identity</span>
+        <img src="web/Story telling of logo.jpg" alt="Final identity presentation board on a desk with palette swatches: navy, terracotta, saffron gold, ivory" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">19</div>
+        <h3 data-a style="--d:.4s">Brand mark, complete.</h3>
+        <p data-a style="--d:.55s">From torn sketch paper to the finished board: the emblem stands beside its
+        swatches — Navy, Terracotta, Saffron-Gold, Ivory — and its typographic partners,
+        <b>Zilla Slab</b> and <b>Gotham</b>. The journey from compass to identity is closed.</p>
+        <div class="tags" data-a style="--d:.7s"><span>final identity</span><span>palette</span><span>typography</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">19</span>
+</section>
+
+<!-- ================= 20 · SYMBOL MEANING (hotspots) ================= -->
+<section class="slide paper" id="s20">
+  <div class="slide-inner">
+    <div class="hs-wrap">
+      <div class="hs-stage" data-a="scale">
+        <img src="web/emblem-puzzle.jpg" alt="Dar Albahja emblem close-up">
+        <button class="hs-dot on" data-hs="0" style="left:50%;top:50%">1</button>
+        <button class="hs-dot" data-hs="1" style="left:50%;top:22%">2</button>
+        <button class="hs-dot" data-hs="2" style="left:81%;top:63%">3</button>
+      </div>
+      <div>
+        <p class="kicker" data-a>Act IV — The Identity · 01</p>
+        <h2 class="display" data-a style="--d:.2s">Anatomy of the emblem.</h2>
+        <div id="hsPanel" data-a style="--d:.4s;margin-top:1.4rem">
+          <div class="idx">01</div><h4>The golden star</h4>
+          <p>At the very centre, a khatam — the eight-point star of Moroccan geometry — rendered in warm gold. Joy at the heart of the house; the hearth every guest gathers around.</p>
+        </div>
+        <p class="hint" data-a style="--d:.6s;text-align:left">tap the numbered points on the emblem</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">20</span>
+</section>
+
+<!-- ================= 21 · LOCKUPS EN + AR ================= -->
+<section class="slide paper" id="s21">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 02</p>
+      <h2 class="display" data-a style="--d:.2s">One emblem, two voices.</h2>
+      <div class="pair sq">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/logo-en-1600.jpg" alt="Dar Albahja English lockup: emblem above DAR ALBAHJA MARRAKECH wordmark" loading="lazy"></div><figcaption>English lockup</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/logo-ar-1600.jpg" alt="Dar Albahja Arabic lockup with emblem and Arabic calligraphy" loading="lazy"></div><figcaption>Arabic lockup · دار البهجة مراكش</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Serif capitals with a terracotta locator for the world; Arabic calligraphy drawn to
+      share the emblem's weight for home. Neither translates the other — <b>they are equals.</b></p>
+    </div>
+  </div>
+  <span class="pageno">21</span>
+</section>
+
+<!-- ================= 22 · BILINGUAL SIGNATURE ================= -->
+<section class="slide paper" id="s22">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1;max-height:66vh;margin-inline:auto" data-a="scale">
+        <span class="tape">Lockup · Bilingual</span>
+        <img src="web/logo-enar-1600.jpg" alt="Dar Albahja bilingual signature with English and Arabic wordmarks" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">22</div>
+        <h3 data-a style="--d:.4s">The full signature.</h3>
+        <p data-a style="--d:.55s">Emblem, English wordmark, terracotta locator, Arabic name — the complete bilingual
+        signature. One emblem, two scripts, zero hierarchy between cultures.
+        This is the primary form used wherever space allows.</p>
+        <div class="tags" data-a style="--d:.7s"><span>primary signature</span><span>bilingual harmony</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">22</span>
+</section>
+
+<!-- ================= 23 · MONOCHROME PAIR ================= -->
+<section class="slide paper" id="s23">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 04</p>
+      <h2 class="display" data-a style="--d:.2s">One colour, no compromise.</h2>
+      <div class="pair sq">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/mono-black-1600.jpg" alt="Dar Albahja logo in solid black monochrome" loading="lazy"></div><figcaption>Positive · stamps &amp; engraving</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/mono-white-1600.jpg" alt="Dar Albahja logo reversed in white on dark" loading="lazy"></div><figcaption>Reversed · the evening voice</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Strip away navy, terracotta and gold, and the emblem must still stand.
+      Black for stamps, embossing and newsprint; white for backlit signage and the night-time façade.</p>
+    </div>
+  </div>
+  <span class="pageno">23</span>
+</section>
+
+<!-- ================= 24 · MOOD BOARD ================= -->
+<section class="slide paper" id="s24">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Mood board · I</span>
+        <img src="web/ellement inspiration.jpg" alt="Dar Albahja mood board: lanterns, brass teapots, tagine, zellige tiles, carved doors, with six-colour palette" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">24</div>
+        <h3 data-a style="--d:.4s">The world the<br>brand lives in.</h3>
+        <p data-a style="--d:.55s">Pierced-brass lanterns, a steaming tagine, zellige stars, cedar doors and woven
+        textiles: the emblem beside the world that shaped it. Every element of the identity
+        can be traced back to one of these photographs.</p>
+        <div class="tags" data-a style="--d:.7s"><span>lanterns</span><span>zellige</span><span>brass</span><span>textiles</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">24</span>
+</section>
+
+<!-- ================= 25 · PALETTE INSPIRATION A ================= -->
+<section class="slide paper" id="s25">
+  <div class="slide-inner">
+    <div class="fig-slide rev">
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">25</div>
+        <h3 data-a style="--d:.4s">Palette study —<br>the wide gamut.</h3>
+        <p data-a style="--d:.55s">Before the palette was narrowed, the full breadth of the city was swatched:
+        deep navy, terracotta, saffron gold — and the supporting cast of Moroccan green,
+        sand beige and warm brown that appear across menus and interiors.</p>
+        <div class="tags" data-a style="--d:.7s"><span>colour research</span><span>eight-point swatches</span></div>
+      </div>
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Palette study · A</span>
+        <img src="web/Color palette - Var 1 inspiration A.jpg" alt="Mood board with colour palette study: deep navy, terracotta, saffron gold, Moroccan green, sand beige, warm brown" loading="lazy">
+      </figure>
+    </div>
+  </div>
+  <span class="pageno">25</span>
+</section>
+
+<!-- ================= 26 · PALETTE INSPIRATION B ================= -->
+<section class="slide paper" id="s26">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Palette study · B</span>
+        <img src="web/Color palette - Var 1 inspiration B.jpg" alt="Essence mood board: riad courtyard at dusk with four tinted emblem colourway explorations" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">26</div>
+        <h3 data-a style="--d:.4s">Essence — authentic,<br>elegant, timeless.</h3>
+        <p data-a style="--d:.55s">The feel &amp; atmosphere brief distilled: a candle-lit courtyard, warm and earthy
+        tones, heritage and hospitality — tested against the first tinted explorations of
+        the emblem in navy, burgundy, green and gold.</p>
+        <div class="tags" data-a style="--d:.7s"><span>atmosphere</span><span>tint tests</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">26</span>
+</section>
+
+<!-- ================= 27 · PALETTE INSPIRATION C ================= -->
+<section class="slide paper" id="s27">
+  <div class="slide-inner">
+    <div class="fig-slide rev">
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">27</div>
+        <h3 data-a style="--d:.4s">Textures &amp; materials.</h3>
+        <p data-a style="--d:.55s">A brand you can touch: carved plaster, terracotta, cedar wood, brushed brass and
+        woven textiles. These five materials guide every physical application — from the
+        reception wall to the embroidery thread.</p>
+        <div class="tags" data-a style="--d:.7s"><span>carved plaster</span><span>wood</span><span>brass</span><span>woven textiles</span></div>
+      </div>
+      <figure class="frame kb" style="aspect-ratio:1672/941" data-a="scale">
+        <span class="tape">Palette study · C</span>
+        <img src="web/Color palette - Var 1 inspiration C.jpg" alt="Textures and materials mood board: carved plaster, terracotta, wood, brass, woven textiles with colour palette" loading="lazy">
+      </figure>
+    </div>
+  </div>
+  <span class="pageno">27</span>
+</section>
+
+<!-- ================= 28 · PALETTE SPEC (interactive) ================= -->
+<section class="slide paper" id="s28">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 09</p>
+      <h2 class="display" data-a style="--d:.2s">The palette, made official.</h2>
+      <div class="chips">
+        <div class="chip" data-hex="#1F2E4A" data-a style="--d:.35s"><div class="sw" style="background:#1F2E4A"></div><div class="meta"><b>Deep Navy</b><code>#1F2E4A</code><small>Stability, elegance, heritage. The anchor of every layout.</small></div></div>
+        <div class="chip" data-hex="#B65A2A" data-a style="--d:.5s"><div class="sw" style="background:#B65A2A"></div><div class="meta"><b>Terracotta</b><code>#B65A2A</code><small>Warmth, earth, Moroccan craft. Accents and calls to action.</small></div></div>
+        <div class="chip" data-hex="#D4B15C" data-a style="--d:.65s"><div class="sw" style="background:#D4B15C"></div><div class="meta"><b>Warm Gold</b><code>#D4B15C</code><small>Hospitality and light. Reserved for the star and fine details.</small></div></div>
+        <div class="chip" data-hex="#EDE6DA" data-a style="--d:.8s"><div class="sw" style="background:#EDE6DA;border-bottom:1px solid rgba(31,46,74,.08)"></div><div class="meta"><b>Soft Sand</b><code>#EDE6DA</code><small>Backgrounds and breathing room — the riad's quiet plaster.</small></div></div>
+      </div>
+      <div class="ratio" data-a style="--d:.95s">
+        <i style="width:45%;background:#EDE6DA"></i><i style="width:30%;background:#1F2E4A"></i><i style="width:18%;background:#B65A2A"></i><i style="width:7%;background:#D4B15C"></i>
+      </div>
+      <div class="ratio-l" data-a style="--d:1.05s"><span>Sand 45%</span><span>Navy 30%</span><span>Terracotta 18%</span><span>Gold 7%</span></div>
+      <p class="hint" data-a style="--d:1.15s">click any swatch to copy its hex code</p>
+    </div>
+  </div>
+  <span class="pageno">28</span>
+</section>
+
+<!-- ================= 29 · COLOURWAYS I + II ================= -->
+<section class="slide paper" id="s29">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 10</p>
+      <h2 class="display" data-a style="--d:.2s">The emblem changes clothes — I.</h2>
+      <div class="pair sq">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Color Variation - 1.jpg" alt="Dar Albahja logo colourway in Atlas teal and rust" loading="lazy"></div><figcaption>I · Atlas Teal &amp; Rust — garden terraces, summer menus</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Color Variation - 2.jpg" alt="Dar Albahja logo colourway in cacao brown, clay red and mint green" loading="lazy"></div><figcaption>II · Cacao, Clay &amp; Mint — the tea-house register</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">The geometry never moves; only the palette breathes with the season.
+      Cooler Majorelle shades for the garden, cacao and mint for afternoon tea.</p>
+    </div>
+  </div>
+  <span class="pageno">29</span>
+</section>
+
+<!-- ================= 30 · COLOURWAYS III + IV ================= -->
+<section class="slide paper" id="s30">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 11</p>
+      <h2 class="display" data-a style="--d:.2s">The emblem changes clothes — II.</h2>
+      <div class="pair sq">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Color Variation - 3.jpg" alt="Dar Albahja logo colourway in olive green, saffron and brick red" loading="lazy"></div><figcaption>III · Olive, Saffron &amp; Brick — market-day campaigns</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Color Variation - 4.jpg" alt="Dar Albahja logo colourway in pomegranate red and olive green" loading="lazy"></div><figcaption>IV · Pomegranate &amp; Olive — the festive register</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Harvest tones for seasonal collaborations; pomegranate and olive for Ramadan
+      nights, weddings and Eid — celebration without losing the mark's poise.</p>
+    </div>
+  </div>
+  <span class="pageno">30</span>
+</section>
+
+<!-- ================= 31 · TYPOGRAPHY ================= -->
+<section class="slide paper" id="s31">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act IV — The Identity · 12</p>
+      <h2 class="display" data-a style="--d:.2s">Two voices, one table.</h2>
+      <div class="typo" style="margin-top:1.8rem">
+        <div class="spec z" data-a style="--d:.35s">
+          <small>Primary · Zilla Slab</small>
+          <div class="big">Joy, served warm.</div>
+          <p>Headlines, menus, the wordmark's spirit. A slab serif with the confidence of carved plaster.</p>
+          <div class="abc">AaBbCcDdEeFfGg 0123456789</div>
+        </div>
+        <div class="spec m" data-a style="--d:.5s">
+          <small>Secondary · Gotham / Montserrat</small>
+          <div class="big">Clear as daylight.</div>
+          <p>Body copy, wayfinding, captions. Geometric, quiet, endlessly legible beside the ornament.</p>
+          <div class="abc">AaBbCcDdEeFfGg 0123456789</div>
+        </div>
+        <div id="typeplay" data-a style="--d:.65s">
+          <small style="font-size:.6rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)">Try the brand voice</small>
+          <input id="tpIn" type="text" maxlength="40" placeholder="Type a dish, a name, a promise…" aria-label="Type to preview brand typography">
+          <div id="tpOut">Couscous Vendredi</div>
+          <div id="tpOut2">Couscous Vendredi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">31</span>
+</section>
+
+<!-- ================= 32 · ACT V OPEN ================= -->
+<section class="slide dark" id="s32">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center">
+      <p class="kicker" style="justify-content:center" data-a>Act V — Into the World</p>
+      <h1 class="display" data-a style="--d:.25s">A mark is only alive<br>where it lands.</h1>
+      <p class="lede" data-a style="--d:.5s;margin-inline:auto">Paper, cotton, brass, pixels, wind.
+      The next pages show the identity leaving the studio and taking its seat in the world —
+      from a handshake card to a flag on the boulevard.</p>
+    </div>
+  </div>
+  <span class="pageno">32</span>
+</section>
+
+<!-- ================= 33 · BUSINESS CARD ================= -->
+<section class="slide paper" id="s33">
+  <div class="slide-inner">
+    <div class="fig-slide">
+      <figure class="frame kb" style="aspect-ratio:1376/768" data-a="scale">
+        <span class="tape">Application · 01</span>
+        <img src="web/Mockup Businesscard.jpg" alt="Dar Albahja business card mockup" loading="lazy">
+      </figure>
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">33</div>
+        <h3 data-a style="--d:.4s">The first handshake.</h3>
+        <p data-a style="--d:.55s">Navy face, sand reverse, the emblem foiled in gold. A business card that feels like
+        the first pour of mint tea — small, precise, generous.</p>
+        <div class="tags" data-a style="--d:.7s"><span>stationery</span><span>gold foil</span></div>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">33</span>
+</section>
+
+<!-- ================= 34 · LETTERHEAD + ENVELOPE ================= -->
+<section class="slide paper" id="s34">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act V — Into the World · 03</p>
+      <h2 class="display" data-a style="--d:.2s">Correspondence, with ceremony.</h2>
+      <div class="pair">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Mockup Letterhead.jpg" alt="Dar Albahja letterhead mockup" loading="lazy"></div><figcaption>Letterhead</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Mockup Envelope.jpg" alt="Dar Albahja envelope mockup" loading="lazy"></div><figcaption>Envelope</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Even an invoice can smell faintly of orange blossom. The letterhead keeps ornament
+      to the margins; the envelope seals every letter with the eight-point star.</p>
+    </div>
+  </div>
+  <span class="pageno">34</span>
+</section>
+
+<!-- ================= 35 · PACKAGING + RIDER ================= -->
+<section class="slide paper" id="s35">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act V — Into the World · 04</p>
+      <h2 class="display" data-a style="--d:.2s">Joy, to go.</h2>
+      <div class="pair">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Mockup Packaging.jpg" alt="Dar Albahja takeaway packaging mockup" loading="lazy"></div><figcaption>Takeaway packaging</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Mockup Rider.jpg" alt="Dar Albahja delivery rider mockup" loading="lazy"></div><figcaption>Delivery rider</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">The box carries the pattern; the rider carries the promise. Thirty minutes across
+      town and the tagine arrives still telling the brand's story — warm, patterned, unmistakable.</p>
+    </div>
+  </div>
+  <span class="pageno">35</span>
+</section>
+
+<!-- ================= 36 · UNIFORM ================= -->
+<section class="slide paper" id="s36">
+  <div class="slide-inner">
+    <div class="fig-slide rev">
+      <div class="caption">
+        <div class="idx" data-a style="--d:.3s">36</div>
+        <h3 data-a style="--d:.4s">Worn with pride.</h3>
+        <p data-a style="--d:.55s">Navy cotton, gold-thread embroidery over the heart. When the team wears the emblem,
+        the identity stops being graphics and becomes <b>hospitality with a heartbeat</b>.</p>
+        <div class="tags" data-a style="--d:.7s"><span>uniform</span><span>embroidery</span></div>
+      </div>
+      <figure class="frame kb" style="aspect-ratio:1376/768" data-a="scale">
+        <span class="tape">Application · 05</span>
+        <img src="web/Mockup Unform.jpg" alt="Dar Albahja staff uniform mockup with embroidered logo" loading="lazy">
+      </figure>
+    </div>
+  </div>
+  <span class="pageno">36</span>
+</section>
+
+<!-- ================= 37 · SIGNAGE ================= -->
+<section class="slide paper" id="s37">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act V — Into the World · 06</p>
+      <h2 class="display" data-a style="--d:.2s">Arrival, twice.</h2>
+      <div class="pair">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Mockup OPutdoor Logo.jpg" alt="Dar Albahja outdoor facade signage mockup" loading="lazy"></div><figcaption>Street façade</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Mockup Indoor Logo Reception.jpg" alt="Dar Albahja indoor reception wall logo mockup" loading="lazy"></div><figcaption>Reception wall</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Outside, the emblem glows against the red city's dusk. Inside, it waits in brushed
+      brass behind the reception desk — the second welcome, quieter and closer.</p>
+    </div>
+  </div>
+  <span class="pageno">37</span>
+</section>
+
+<!-- ================= 38 · EVENTS ================= -->
+<section class="slide paper" id="s38">
+  <div class="slide-inner">
+    <div class="story" style="max-width:1050px">
+      <p class="kicker" data-a>Act V — Into the World · 07</p>
+      <h2 class="display" data-a style="--d:.2s">Where the wind takes it.</h2>
+      <div class="pair">
+        <figure data-a style="--d:.4s"><div class="frame kb"><img src="web/Mockup Beach flag.jpg" alt="Dar Albahja beach flag mockup" loading="lazy"></div><figcaption>Beach flag</figcaption></figure>
+        <figure data-a style="--d:.55s"><div class="frame kb"><img src="web/Mockup Rollup.jpg" alt="Dar Albahja rollup banner mockup" loading="lazy"></div><figcaption>Event rollup</figcaption></figure>
+      </div>
+      <p class="lede" data-a style="--d:.75s">Food festivals, pop-ups, weddings in the palmeraie: the identity travels light.
+      A flag in the sea breeze and a rollup by the door, and Dar Albahja has already set the table.</p>
+    </div>
+  </div>
+  <span class="pageno">38</span>
+</section>
+
+<!-- ================= 39 · WEBSITE (responsive preview) ================= -->
+<section class="slide paper web-slide" id="s39">
+  <div class="slide-inner">
+    <div style="text-align:center;max-width:1050px;margin-inline:auto">
+      <p class="kicker" style="justify-content:center" data-a>Act V — Into the World · 08</p>
+      <h2 class="display" data-a style="--d:.2s">One home, every screen.</h2>
+      <div class="devbar" data-a style="--d:.4s" role="group" aria-label="Device preview switcher">
+        <button class="on" data-dev="desktop">🖥 Desktop</button>
+        <button data-dev="tablet">📱 Tablet</button>
+        <button data-dev="phone">📲 Phone</button>
+      </div>
+      <div id="device" data-mode="desktop" data-a="scale" style="--d:.55s">
+        <div class="cam"></div>
+        <div class="screen">
+          <div class="site">
+            <header class="nv">
+              <img src="web/emblem-puzzle.jpg" alt=""><b>DAR ALBAHJA</b>
+              <nav><span>Menu</span><span>Story</span><span>Private dining</span><span>Visit</span></nav>
+              <button class="burger" aria-label="menu">☰</button>
+              <button class="rsv">Reserve</button>
+            </header>
+            <div class="hero">
+              <svg viewBox="-110 -110 220 220"><use href="#star8" x="-110" y="-110" width="220" height="220"/></svg>
+              <img src="web/emblem-puzzle.jpg" alt="Dar Albahja emblem">
+              <h1>Joy, served warm.</h1>
+              <div class="ar arabic">دار البهجة مراكش</div>
+              <p>A Moroccan dining house in the heart of Marrakech — slow tagines, high-poured tea, and a courtyard that remembers your name.</p>
+              <button class="cta">Reserve a table</button>
+            </div>
+            <div class="menu">
+              <h2>From the clay pot</h2>
+              <div class="dishes">
+                <div class="dish"><div class="em">🍲</div><b>Tagine Royale</b><span>Lamb, prunes, roasted almonds, orange blossom.</span><span class="pr">180 MAD</span></div>
+                <div class="dish"><div class="em">🥘</div><b>Couscous Vendredi</b><span>Seven vegetables, caramelised onion tfaya.</span><span class="pr">140 MAD</span></div>
+                <div class="dish"><div class="em">🫖</div><b>Atay &amp; Pastry</b><span>Mint tea poured high, kaab el ghazal.</span><span class="pr">60 MAD</span></div>
+              </div>
+            </div>
+            <div class="strip">
+              <div><b>Hours</b><span>Daily 12:00 – 23:00</span></div>
+              <div><b>Find us</b><span>Derb El Bahja 8, Médina</span></div>
+              <div><b>Call</b><span>+212 5 24 00 00 00</span></div>
+            </div>
+            <div class="ft"><div class="arabic">دار البهجة مراكش</div>© Dar Albahja · Marrakech — the House of Joy</div>
+          </div>
+        </div>
+      </div>
+      <p class="hint" data-a style="--d:.75s">switch devices — the layout adapts, the joy doesn't</p>
+    </div>
+  </div>
+  <span class="pageno">39</span>
+</section>
+
+<!-- ================= 40 · FINALE ================= -->
+<section class="slide dark" id="s40">
+  <div class="slide-inner">
+    <div class="story" style="text-align:center;max-width:1000px">
+      <div class="arabic" data-a="scale" style="font-size:clamp(2.6rem,8vw,5rem);color:var(--gold);line-height:1.3">شكراً</div>
+      <h1 class="display" data-a style="--d:.3s">Shukran — thank you<br>for opening the door.</h1>
+      <p class="lede" data-a style="--d:.55s;margin-inline:auto">Forty pages ago this was a city, a silhouette and a star.
+      You assembled it yourself — which means, in the oldest Marrakchi tradition, you are no longer a guest.
+      <b class="gold">You are family.</b></p>
+      <div class="fin-grid" data-a style="--d:.8s">
+        <img src="web/Mockup Businesscard.jpg" alt="" loading="lazy"><img src="web/Mockup Letterhead.jpg" alt="" loading="lazy">
+        <img src="web/Mockup Packaging.jpg" alt="" loading="lazy"><img src="web/Mockup Unform.jpg" alt="" loading="lazy">
+        <img src="web/Mockup OPutdoor Logo.jpg" alt="" loading="lazy"><img src="web/Mockup Beach flag.jpg" alt="" loading="lazy">
+      </div>
+      <p data-a style="--d:1s;margin-top:1.4rem;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(237,230,218,.55)">40 pages · 28 artworks · one emblem</p>
+      <div class="fin-btns" data-a style="--d:1.1s">
+        <button id="replayBtn">↻ Replay the story</button>
+        <button id="resetBtn">Lock the doors again</button>
+      </div>
+    </div>
+  </div>
+  <span class="pageno">40</span>
+</section>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+/* ================= state ================= */
+const TOTAL = 40;
+const deck = document.getElementById('deck');
+const slides = Array.from(deck.querySelectorAll('.slide'));
+const state = {
+  cur: 1,
+  gate: sessionStorage.getItem('db_gate') === '1',
+  puzzle: sessionStorage.getItem('db_puzzle') === '1',
+  auto: false, autoTimer: null,
+};
+const CHAPTERS = [
+  [1,'The Door'],[2,'Act I — The City'],[10,'Act II — The Hand'],
+  [17,'Act III — The Assembly'],[20,'Act IV — The Identity'],
+  [32,'Act V — Into the World'],[40,'Shukran']
+];
+const DARKS = new Set([1,2,10,16,18,32,40]);
+
+const $ = s => document.querySelector(s);
+const counter = $('#counter b'), progress = $('#progress i'), chLabel = $('#chapterlabel');
+
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+function maxReach(){
+  if(!state.gate) return 1;
+  if(!state.puzzle) return 17;
+  return TOTAL;
+}
+function chapterOf(n){
+  let name = CHAPTERS[0][1];
+  for(const [start, label] of CHAPTERS){ if(n >= start) name = label; }
+  return name;
+}
+function go(n, back){
+  n = Math.max(1, Math.min(TOTAL, n));
+  const reach = maxReach();
+  if(n > reach){
+    n = reach;
+    if(reach === 1) toast('🔒 The door is locked — enter the key first.');
+    else if(reach === 17) toast('🔒 Assemble the emblem to continue the story.');
+  }
+  if(n === state.cur){ refreshChrome(); return; }
+  deck.classList.toggle('back', back === true || n < state.cur);
+  slides[state.cur-1].classList.remove('active');
+  state.cur = n;
+  const s = slides[n-1];
+  // retrigger enter animations
+  s.querySelectorAll('[data-a]').forEach(el=>{ el.style.animation='none'; void el.offsetWidth; el.style.animation=''; });
+  s.classList.add('active');
+  refreshChrome();
+  if(location.hash !== '#p'+n) history.replaceState(null,'','#p'+n);
+}
+function refreshChrome(){
+  counter.textContent = String(state.cur).padStart(2,'0');
+  progress.style.width = (state.cur/TOTAL*100)+'%';
+  chLabel.textContent = chapterOf(state.cur);
+  document.body.classList.toggle('on-dark', DARKS.has(state.cur));
+}
+const next = ()=>go(state.cur+1), prev = ()=>go(state.cur-1, true);
+
+/* ================= inputs ================= */
+$('#nextbtn').addEventListener('click', next);
+$('#prevbtn').addEventListener('click', prev);
+document.addEventListener('keydown', e=>{
+  if(e.target.matches('input,textarea')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ') { e.preventDefault(); next(); }
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
+  else if(e.key==='Home'){ go(1,true); }
+});
+let wheelLock = 0;
+document.addEventListener('wheel', e=>{
+  const sc = e.target.closest('.screen, .slide-inner');
+  if(sc && sc.scrollHeight > sc.clientHeight + 8){
+    const atTop = sc.scrollTop <= 0, atBot = sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2;
+    if((e.deltaY > 0 && !atBot) || (e.deltaY < 0 && !atTop)) return; // let it scroll
+  }
+  const now = Date.now();
+  if(now - wheelLock < 950 || Math.abs(e.deltaY) < 24) return;
+  wheelLock = now;
+  e.deltaY > 0 ? next() : prev();
+}, {passive:true});
+let tx=null, ty=null;
+document.addEventListener('touchstart', e=>{ if(e.touches.length===1){ tx=e.touches[0].clientX; ty=e.touches[0].clientY; } }, {passive:true});
+document.addEventListener('touchend', e=>{
+  if(tx===null) return;
+  if(e.target.closest('.pz-piece, .pz-slot, input, button, a')) { tx=null; return; }
+  const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+  tx=null;
+  if(Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy)*1.4) dx < 0 ? next() : prev();
+}, {passive:true});
+
+/* ================= chapters menu ================= */
+const chapters = $('#chapters');
+$('#menubtn').addEventListener('click', ()=>{
+  const reach = maxReach();
+  chapters.querySelectorAll('a[data-go]').forEach(a=>{
+    a.classList.toggle('locked', Number(a.dataset.go) > reach);
+  });
+  chapters.classList.add('open');
+});
+$('#chclose').addEventListener('click', ()=>chapters.classList.remove('open'));
+chapters.addEventListener('click', e=>{
+  if(e.target === chapters) chapters.classList.remove('open');
+  const a = e.target.closest('a[data-go]'); if(!a) return;
+  const n = Number(a.dataset.go);
+  if(n > maxReach()){ toast('🔒 That chapter is still locked.'); return; }
+  chapters.classList.remove('open'); go(n);
+});
+
+/* ================= autoplay ================= */
+const autobtn = $('#autobtn');
+function stopAuto(){ state.auto=false; clearInterval(state.autoTimer); autobtn.classList.remove('auto-on'); autobtn.textContent='▶'; }
+autobtn.addEventListener('click', ()=>{
+  if(state.auto){ stopAuto(); toast('Auto-play paused'); return; }
+  state.auto = true; autobtn.classList.add('auto-on'); autobtn.textContent='⏸';
+  toast('Auto-play — the story tells itself');
+  state.autoTimer = setInterval(()=>{
+    const reach = maxReach();
+    if(state.cur >= TOTAL){ stopAuto(); return; }
+    if(state.cur + 1 > reach){ stopAuto(); toast(reach===1 ? '🔑 Enter the key to continue' : '🧩 Your turn — assemble the emblem'); return; }
+    next();
+  }, 7000);
+});
+
+/* ================= gate (page 1) ================= */
+$('#gateForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const v = $('#gateInput').value.trim().toLowerCase();
+  if(v === 'dena'){
+    state.gate = true; sessionStorage.setItem('db_gate','1');
+    $('#gateErr').textContent = '';
+    toast('✦ Marhaba — welcome inside ✦');
+    setTimeout(()=>go(2), 350);
+  }else{
+    const f = $('#gateForm'); f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake');
+    $('#gateErr').textContent = 'That key doesn’t fit this lock. Try again.';
+    $('#gateInput').select();
+  }
+});
+
+/* ================= puzzle (page 17) ================= */
+const board = $('#pzBoard'), tray = $('#pzTray'), ghost = $('#pzGhost'),
+      pzCount = $('#pzCount'), pzContinue = $('#pzContinue');
+let placed = 0, selected = null;
+
+function pieceBG(el, i){
+  el.classList.add('pz-img');
+  el.style.backgroundPosition = ((i%3)*50)+'% '+(Math.floor(i/3)*50)+'%';
+}
+function buildPuzzle(){
+  board.innerHTML=''; tray.innerHTML=''; placed = 0; selected = null;
+  for(let i=0;i<9;i++){
+    const slot = document.createElement('div');
+    slot.className='pz-slot'; slot.dataset.i=i;
+    board.appendChild(slot);
+  }
+  let order = [...Array(9).keys()];
+  do{ order.sort(()=>Math.random()-.5); }while(order.every((v,i)=>v===i));
+  order.forEach(i=>{
+    const p = document.createElement('div');
+    p.className='pz-piece'; p.dataset.i=i; p.setAttribute('role','button');
+    p.setAttribute('aria-label','Puzzle tile '+(i+1));
+    pieceBG(p,i);
+    tray.appendChild(p);
+  });
+  updateCount();
+}
+function updateCount(){ pzCount.textContent = placed+' / 9'; }
+function placePiece(slot, piece){
+  const fill = document.createElement('div');
+  pieceBG(fill, Number(piece.dataset.i));
+  slot.appendChild(fill); slot.classList.add('done');
+  piece.classList.add('gone'); piece.classList.remove('sel');
+  selected = null; placed++;
+  updateCount();
+  if(placed === 9) solve();
+}
+function tryPlace(slot, piece){
+  if(!slot || slot.classList.contains('done')) return false;
+  if(slot.dataset.i === piece.dataset.i){ placePiece(slot, piece); return true; }
+  slot.classList.remove('bad'); void slot.offsetWidth; slot.classList.add('bad');
+  toast('Not that cell — look at the faint pattern beneath.');
+  return false;
+}
+function solve(){
+  board.classList.add('solved');
+  state.puzzle = true; sessionStorage.setItem('db_puzzle','1');
+  pzContinue.classList.add('ready');
+  toast('✦ Mabrouk! The emblem is whole. ✦');
+  const r = board.getBoundingClientRect();
+  for(let k=0;k<26;k++){
+    const s = document.createElement('div');
+    s.className='sparkle'; s.textContent='✦';
+    s.style.left = (r.left + r.width/2)+'px';
+    s.style.top = (r.top + r.height/2)+'px';
+    s.style.setProperty('--dx', (Math.cos(k/26*Math.PI*2)*(90+Math.random()*140))+'px');
+    s.style.setProperty('--dy', (Math.sin(k/26*Math.PI*2)*(90+Math.random()*140))+'px');
+    s.style.animationDelay = (Math.random()*.25)+'s';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 1600);
+  }
+}
+pzContinue.addEventListener('click', ()=>{ if(state.puzzle) go(18); });
+
+/* tap-to-place */
+tray.addEventListener('click', e=>{
+  const p = e.target.closest('.pz-piece'); if(!p || p.classList.contains('gone')) return;
+  if(selected === p){ p.classList.remove('sel'); selected=null; return; }
+  tray.querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));
+  p.classList.add('sel'); selected = p;
+});
+board.addEventListener('click', e=>{
+  if(!selected) return;
+  const slot = e.target.closest('.pz-slot');
+  if(slot) tryPlace(slot, selected);
+});
+/* drag with pointer events */
+let dragP = null;
+tray.addEventListener('pointerdown', e=>{
+  const p = e.target.closest('.pz-piece'); if(!p || p.classList.contains('gone')) return;
+  dragP = p; ghost.style.display='block';
+  pieceBG(ghost, Number(p.dataset.i));
+  moveGhost(e);
+});
+function moveGhost(e){ ghost.style.left=(e.clientX-45)+'px'; ghost.style.top=(e.clientY-45)+'px'; }
+document.addEventListener('pointermove', e=>{
+  if(!dragP) return;
+  moveGhost(e);
+  board.querySelectorAll('.hot').forEach(x=>x.classList.remove('hot'));
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const slot = el && el.closest('.pz-slot');
+  if(slot && !slot.classList.contains('done')) slot.classList.add('hot');
+});
+document.addEventListener('pointerup', e=>{
+  if(!dragP) return;
+  ghost.style.display='none';
+  board.querySelectorAll('.hot').forEach(x=>x.classList.remove('hot'));
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const slot = el && el.closest('.pz-slot');
+  const wasClick = false;
+  if(slot) tryPlace(slot, dragP);
+  dragP = null;
+});
+buildPuzzle();
+if(state.puzzle){ // restore solved state on reload
+  board.querySelectorAll('.pz-slot').forEach(slot=>{
+    const fill=document.createElement('div'); pieceBG(fill, Number(slot.dataset.i));
+    slot.appendChild(fill); slot.classList.add('done');
+  });
+  tray.querySelectorAll('.pz-piece').forEach(p=>p.classList.add('gone'));
+  placed = 9; updateCount(); board.classList.add('solved'); pzContinue.classList.add('ready');
+}
+
+/* ================= pillar cards ================= */
+document.querySelectorAll('.pcard').forEach(c=>c.addEventListener('click', ()=>c.classList.toggle('flip')));
+document.querySelectorAll('.band').forEach(b=>b.addEventListener('click', ()=>b.classList.toggle('open')));
+
+/* ================= hotspots ================= */
+const HS = [
+  ['01','The golden star','At the very centre, a khatam — the eight-point star of Moroccan geometry — rendered in warm gold. Joy at the heart of the house; the hearth every guest gathers around.'],
+  ['02','Eight tagines in rotation','Look closely at the petals: each one shelters the silhouette from page six — the tagine. Repeated eight times, cuisine becomes rhythm, and rhythm becomes hospitality.'],
+  ['03','Two interlaced octagons','Navy and terracotta lines weave over and under each other without ever breaking — two cultures, two scripts and two colours tied in a single Moroccan knot.']
+];
+const hsPanel = $('#hsPanel');
+document.querySelectorAll('.hs-dot').forEach(d=>d.addEventListener('click', ()=>{
+  document.querySelectorAll('.hs-dot').forEach(x=>x.classList.remove('on'));
+  d.classList.add('on');
+  const [i,t,p] = HS[Number(d.dataset.hs)];
+  hsPanel.innerHTML = '<div class="idx">'+i+'</div><h4>'+t+'</h4><p>'+p+'</p>';
+}));
+
+/* ================= palette copy ================= */
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click', ()=>{
+  const hex = ch.dataset.hex;
+  (navigator.clipboard ? navigator.clipboard.writeText(hex) : Promise.reject())
+    .then(()=>toast('Copied '+hex+' ✦')).catch(()=>toast(hex));
+}));
+
+/* ================= type playground ================= */
+const tpIn=$('#tpIn'), tpOut=$('#tpOut'), tpOut2=$('#tpOut2');
+if(tpIn) tpIn.addEventListener('input', ()=>{
+  const v = tpIn.value.trim() || 'Couscous Vendredi';
+  tpOut.textContent = v; tpOut2.textContent = v;
+});
+
+/* ================= website device toggle ================= */
+document.querySelectorAll('.devbar button').forEach(b=>b.addEventListener('click', ()=>{
+  document.querySelectorAll('.devbar button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  $('#device').dataset.mode = b.dataset.dev;
+}));
+
+/* ================= finale ================= */
+$('#replayBtn').addEventListener('click', ()=>go(2, true));
+$('#resetBtn').addEventListener('click', ()=>{
+  sessionStorage.removeItem('db_gate'); sessionStorage.removeItem('db_puzzle');
+  state.gate=false; state.puzzle=false;
+  board.classList.remove('solved'); pzContinue.classList.remove('ready');
+  buildPuzzle();
+  toast('The doors are locked again. Sabah el kheir.');
+  go(1, true);
+});
+
+/* ================= boot ================= */
+const hashN = Number((location.hash.match(/#p(\d+)/)||[])[1]) || 1;
+slides[0].classList.add('active');
+state.cur = 1; refreshChrome();
+if(hashN > 1) setTimeout(()=>go(hashN), 60);
+})();
+</script>
+</body>
+</html>
