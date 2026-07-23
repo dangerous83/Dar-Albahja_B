@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>
+/* Gate mobile phones out early (before paint) — tablets, laptops, desktops and
+   interactive/touch screens are all welcome; only handheld phones are blocked. */
+if(/Android.*Mobile|iPhone|iPod|Windows Phone|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  document.documentElement.classList.add('is-phone');
+}
+</script>
 <title>Dar Albahja — The Story of a Mark</title>
 <meta name="description" content="Dar Albahja · Marrakech — an interactive 40-page brand identity storytelling experience.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-110 -110 220 220'%3E%3Crect x='-110' y='-110' width='220' height='220' fill='%231F2E4A'/%3E%3Cpolygon points='100,0 41.6,17.2 70.7,70.7 17.2,41.6 0,100 -17.2,41.6 -70.7,70.7 -41.6,17.2 -100,0 -41.6,-17.2 -70.7,-70.7 -17.2,-41.6 0,-100 17.2,-41.6 70.7,-70.7 41.6,-17.2' fill='%23D4B15C'/%3E%3C/svg%3E">
@@ -388,6 +395,21 @@ h2.display{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4.6vw
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.15s !important}
 }
+
+/* ---------- phone gate ---------- */
+#mobileBlock{display:none}
+html.is-phone body>*:not(#mobileBlock){display:none!important}
+html.is-phone #mobileBlock{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:fixed;inset:0;z-index:9999;text-align:center;padding:2.6rem 1.6rem;
+  background:radial-gradient(120% 120% at 50% -10%,var(--navy) 0%,var(--navy-ink) 65%,var(--navy-deep) 100%);
+  color:var(--sand);
+}
+#mobileBlock svg{width:60px;height:60px;color:var(--gold);margin-bottom:1.5rem;animation:spin 40s linear infinite}
+#mobileBlock .kicker{justify-content:center;color:var(--gold-soft)}
+#mobileBlock h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.3rem,6vw,1.7rem);line-height:1.45;max-width:20ch;margin:.8rem 0 1rem}
+#mobileBlock p{font-size:.85rem;line-height:1.85;max-width:32ch;color:rgba(237,230,218,.82)}
+#mobileBlock .note{margin-top:1.7rem;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);border:1px dashed rgba(212,177,92,.45);border-radius:12px;padding:.75rem 1.15rem;max-width:34ch}
 </style>
 </head>
 <body class="on-dark">
@@ -403,6 +425,14 @@ h2.display{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4.6vw
     </symbol>
   </defs>
 </svg>
+
+<div id="mobileBlock" role="alert">
+  <svg viewBox="-110 -110 220 220"><use href="#star8"/></svg>
+  <p class="kicker">Dar Albahja · Marrakech</p>
+  <h1>Every riad has a door sized for the one who arrives.</h1>
+  <p>This storytelling experience — its puzzle, lightbox and layered pages — is built for a bigger canvas.</p>
+  <p class="note">Please open this on a laptop, desktop, tablet or interactive screen to step inside.</p>
+</div>
 
 <div id="bg" aria-hidden="true">
   <div class="dots"></div>
@@ -1273,6 +1303,7 @@ h2.display{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,4.6vw
 <script>
 (function(){
 'use strict';
+if(document.documentElement.classList.contains('is-phone')) return;
 /* ================= state ================= */
 const TOTAL = 40;
 const deck = document.getElementById('deck');
